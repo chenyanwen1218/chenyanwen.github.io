@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给佳佳的小惊喜 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 飘落的心形 */
+        .heart {
+            position: fixed;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 主标题 */
+        .main-title {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .main-title h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .main-title p {
+            font-size: 1.3rem;
+            color: #8e44ad;
+            font-weight: 500;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* 卡片容器 */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .card:hover::before {
+            animation: shimmer 1s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* 互动按钮 */
+        .interactive-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .fun-button {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fun-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .fun-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .fun-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .fun-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* 爱的宣言 */
+        .love-declaration {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .love-declaration h2 {
+            color: #e74c3c;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        .love-text {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 小游戏区域 */
+        .game-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .emoji-item {
+            font-size: 2rem;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .emoji-item:hover {
+            background: #ff6b9d;
+            transform: scale(1.1);
+            border-color: #c44569;
+        }
+
+        .emoji-item.clicked {
+            background: #c44569;
+            color: white;
+            animation: celebration 0.6s ease;
+        }
+
+        @keyframes celebration {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3) rotate(180deg); }
+            100% { transform: scale(1); }
+        }
+
+        /* 音乐提示 */
+        .music-hint {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            z-index: 100;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* 底部签名 */
+        .signature {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .signature p {
+            font-size: 1.1rem;
+            color: #8e44ad;
+            margin-bottom: 10px;
+        }
+
+        .signature .date {
+            color: #95a5a6;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            .main-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .main-title p {
+                font-size: 1.1rem;
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .music-hint {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+
+        /* 点击特效 */
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.5rem;
+            animation: clickBurst 1s ease-out forwards;
+        }
+
+        @keyframes clickBurst {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2) rotate(180deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 音乐提示 -->
+    <div class="music-hint">
+        🎵 建议播放轻音乐享受更佳体验
+    </div>
+
+    <!-- 飘落的心形背景 -->
+    <div id="hearts-container"></div>
+
+    <div class="container">
+        <!-- 主标题 -->
+        <div class="main-title">
+            <h1>亲爱的佳佳 💕</h1>
+            <p>这是一个专属于你的小世界</p>
+        </div>
+
+        <!-- 卡片区域 -->
+        <div class="card-container">
+            <div class="card">
+                <div class="card-icon">🌸</div>
+                <h3>你就像春天的花朵</h3>
+                <p>美丽、温暖，让我的世界充满色彩。每天看到你的笑容，就像春风拂面一样舒适。</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⭐</div>
+                <h3>你是我的小星星</h3>
+                <p>在黑暗中为我指引方向，在迷茫时给我希望。有你在身边，我感到无比安心。</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🍭</div>
+                <h3>和你在一起很甜蜜</h3>
+                <p>就像吃了最甜的糖果，心情总是很美好。希望我们的每一天都充满甜蜜和快乐。</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎈</div>
+                <h3>你让我的心情飞起来</h3>
+                <p>像气球一样轻盈快乐，忘记所有烦恼。和你在一起的时光，总是那么美好。</p>
+            </div>
+        </div>
+
+        <!-- 互动区域 -->
+        <div class="interactive-section">
+            <h2 style="color: #8e44ad; margin-bottom: 20px;">点击按钮，看看会发生什么 ✨</h2>
+            <button class="fun-button" onclick="surpriseMe()">给我一个惊喜 🎁</button>
+            <button class="fun-button" onclick="showLoveWords()">想听甜蜜话 💖</button>
+            <button class="fun-button" onclick="createFireworks()">放个烟花 🎆</button>
+        </div>
+
+        <!-- 爱的宣言 -->
+        <div class="love-declaration">
+            <h2>💕 想对你说的话 💕</h2>
+            <p class="love-text">亲爱的佳佳，虽然有时候我可能会让你不开心，但请相信我的心意永远是真诚的。</p>
+            <p class="love-text">你的笑容是我最大的动力，你的快乐是我最大的愿望。</p>
+            <p class="love-text">希望这个小网页能让你开心一点点～</p>
+            <p class="love-text">我会一直努力做一个更好的人，只为了看到你最美的笑容。</p>
+            <p class="love-text" style="font-weight: bold; color: #e74c3c;">我爱你，佳佳 ❤️</p>
+        </div>
+
+        <!-- 小游戏 -->
+        <div class="game-section">
+            <h3 style="color: #8e44ad; margin-bottom: 15px;">🎮 点击所有的爱心，收集我的爱意</h3>
+            <div class="emoji-grid" id="emojiGrid">
+                <div class="emoji-item" onclick="collectLove(this)">❤️</div>
+                <div class="emoji-item" onclick="collectLove(this)">💕</div>
+                <div class="emoji-item" onclick="collectLove(this)">💖</div>
+                <div class="emoji-item" onclick="collectLove(this)">💗</div>
+                <div class="emoji-item" onclick="collectLove(this)">💓</div>
+                <div class="emoji-item" onclick="collectLove(this)">💞</div>
+                <div class="emoji-item" onclick="collectLove(this)">💘</div>
+                <div class="emoji-item" onclick="collectLove(this)">💝</div>
+            </div>
+            <p id="gameStatus" style="color: #7f8c8d; margin-top: 15px;">收集进度: 0/8 💝</p>
+        </div>
+
+        <!-- 签名 -->
+        <div class="signature">
+            <p>永远爱你的</p>
+            <p style="font-weight: bold; color: #e74c3c; font-size: 1.3rem;">你的专属男朋友 💕</p>
+            <p class="date">2024年12月 · 用心制作</p>
+        </div>
+    </div>
+
+    <script>
+        // 创建飘落的心形
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💕', '💖', '💗', '💓', '💞', '💘'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.getElementById('hearts-container').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // 定期创建心形
+        setInterval(createHeart, 800);
+
+        // 点击特效
+        document.addEventListener('click', function(e) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.innerHTML = ['✨', '💫', '⭐', '🌟', '💖'][Math.floor(Math.random() * 5)];
+            effect.style.left = e.clientX + 'px';
+            effect.style.top = e.clientY + 'px';
+            document.body.appendChild(effect);
+
+            setTimeout(() => {
+                effect.remove();
+            }, 1000);
+        });
+
+        // 惊喜按钮
+        function surpriseMe() {
+            const surprises = [
+                '🎉 惊喜！你是世界上最可爱的女孩！',
+                '✨ 今天的你特别美丽！',
+                '🌈 和你在一起的每一天都像彩虹一样美好！',
+                '🦄 你就像独角兽一样珍贵！',
+                '🍰 你比蛋糕还要甜！',
+                '🌸 你的笑容比花朵还要美丽！'
+            ];
+            
+            const surprise = surprises[Math.floor(Math.random() * surprises.length)];
+            alert(surprise);
+            
+            // 创建更多心形
+            for(let i = 0; i < 10; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        // 甜蜜话按钮
+        function showLoveWords() {
+            const loveWords = [
+                '💕 你的存在就是我最大的幸福',
+                '🌟 每个有你的日子都闪闪发光',
+                '🍯 你的声音比蜂蜜还要甜',
+                '🌙 想和你一起数星星到天亮',
+                '🎀 你就是我心中的小公主',
+                '🌺 愿意为你摘下天上的星星'
+            ];
+            
+            const word = loveWords[Math.floor(Math.random() * loveWords.length)];
+            
+            // 创建浮动文字
+            const floatingText = document.createElement('div');
+            floatingText.innerHTML = word;
+            floatingText.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255, 107, 157, 0.9);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 25px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                z-index: 1000;
+                animation: fadeInScale 0.5s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            `;
+            
+            document.body.appendChild(floatingText);
+            
+            setTimeout(() => {
+                floatingText.style.animation = 'fadeOutScale 0.5s ease forwards';
+                setTimeout(() => floatingText.remove(), 500);
+            }, 3000);
+        }
+
+        // 烟花效果
+        function createFireworks() {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.innerHTML = '✨';
+                    firework.style.cssText = `
+                        position: fixed;
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        font-size: ${Math.random() * 20 + 20}px;
+                        color: hsl(${Math.random() * 360}, 70%, 60%);
+                        pointer-events: none;
+                        z-index: 999;
+                        animation: fireworkBurst 1s ease-out forwards;
+                    `;
+                    document.body.appendChild(firework);
+                    
+                    setTimeout(() => firework.remove(), 1000);
+                }, i * 50);
+            }
+        }
+
+        // 爱心收集游戏
+        let collectedHearts = 0;
+        function collectLove(element) {
+            if (!element.classList.contains('clicked')) {
+                element.classList.add('clicked');
+                collectedHearts++;
+                
+                const status = document.getElementById('gameStatus');
+                status.innerHTML = `收集进度: ${collectedHearts}/8 💝`;
+                
+                if (collectedHearts === 8) {
+                    setTimeout(() => {
+                        alert('🎉 恭喜！你收集了所有的爱意！你是我心中最特别的人！💕');
+                        // 重置游戏
+                        collectedHearts = 0;
+                        document.querySelectorAll('.emoji-item').forEach(item => {
+                            item.classList.remove('clicked');
+                        });
+                        status.innerHTML = '收集进度: 0/8 💝';
+                    }, 500);
+                }
+            }
+        }
+
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInScale {
+                from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+                to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            }
+            @keyframes fadeOutScale {
+                from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                to { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            }
+            @keyframes fireworkBurst {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                100% { transform: scale(3) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 页面加载完成后的欢迎
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                alert('🌸 欢迎来到专属于佳佳的小世界！希望这里能让你开心～ 💕');
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
